@@ -34,6 +34,9 @@ class WhisperService:
                 print("🗑️ Temporary file deleted")
 
 whisper_service = WhisperService()
+
+#git+https://github.com/openai/whisper.git
+
 # import whisper
 # import os
 # import tempfile
