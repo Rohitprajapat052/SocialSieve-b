@@ -1,0 +1,33 @@
+# Virtual Environment
+venv/
+env/
+
+# Environment Variables (IMPORTANT!)
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+temp/
+tmp/
+uploads/
+*.mp3
+*.wav
+*.m4a
