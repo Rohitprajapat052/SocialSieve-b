@@ -13,7 +13,8 @@ class Settings(BaseSettings):
     youtube_api_key: str = "placeholder"
     ollama_url: str = "http://localhost:11434"
     environment: str = "development"
-    cors_origins: str = "http://localhost:5173,http://localhost:3000"
+    cors_origins: str = "http://localhost:5173,http://localhost:3000,https://social-sieve-nit-sri.vercel.app
+"
     
     @property
     def cors_origins_list(self) -> List[str]:
