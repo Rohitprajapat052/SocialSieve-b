@@ -8,14 +8,12 @@ beanie==1.26.0
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
 git+https://github.com/openai/whisper.git
-
+email-validator
 requests==2.31.0
 cloudinary==1.44.1
 google-api-python-client==2.108.0
 pydantic>=2.7.1
 pydantic-core>=2.41.4
-
-
 pydantic-settings==2.1.0
 groq==0.32.0
 bcrypt==4.1.2
