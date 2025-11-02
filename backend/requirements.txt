@@ -12,8 +12,8 @@ git+https://github.com/openai/whisper.git
 requests==2.31.0
 cloudinary==1.44.1
 google-api-python-client==2.108.0
-pydantic==2.7.1
-pydantic-core==2.18.1
+pydantic>=2.7.1
+pydantic-core>=2.41.4
 
 
 pydantic-settings==2.1.0
