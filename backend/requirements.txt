@@ -7,7 +7,7 @@ pymongo==4.9.2
 beanie==1.26.0
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
-deepgram-sdk==3.2.4
+deepgram-sdk==2.12.0
 
 email-validator
 requests==2.31.0
