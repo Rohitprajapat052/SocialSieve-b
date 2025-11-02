@@ -18,7 +18,9 @@ class WhisperService:
         We use 'base' - good for learning!
         """
         print("📡 Loading Whisper model...")
-        self.model = whisper.load_model("base")
+        self.model = whisper.load_model("tiny")
+         #self.model = whisper.load_model("base")
+
         print("✅ Whisper model ready!")
     
     async def transcribe_audio(self, audio_file):
