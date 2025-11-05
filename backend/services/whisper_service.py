@@ -68,7 +68,8 @@ class WhisperService:
             if os.path.exists(temp_file.name):
                 os.unlink(temp_file.name)
                 print("🗑️ Temporary file deleted")
-
+                
+whisper_service = WhisperService()
 
 
 #git+https://github.com/openai/whisper.git
