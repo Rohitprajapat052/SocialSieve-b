@@ -1,8 +1,7 @@
 from deepgram import Deepgram
 import os
 import tempfile
-import asyncio
-
+from langdetect import detect, LangDetectException  
 class WhisperService:
     def __init__(self):
         print("🎧 Initializing Deepgram client...")
@@ -11,11 +10,12 @@ class WhisperService:
 
     async def transcribe_audio(self, audio_file):
         """
-        Transcribe audio using Deepgram API
+        Transcribe audio using Deepgram API and auto-detect language (English/Hindi/etc.)
         """
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.mp3')
 
         try:
+            # Save the uploaded audio temporarily
             contents = await audio_file.read()
             temp_file.write(contents)
             temp_file.close()
@@ -23,17 +23,41 @@ class WhisperService:
             print(f"🎤 Sending to Deepgram: {audio_file.filename}")
             with open(temp_file.name, "rb") as f:
                 source = {'buffer': f, 'mimetype': 'audio/mp3'}
-                response = await self.dg_client.transcription.prerecorded(source, {'smart_format': True})
 
-            transcript = response['results']['channels'][0]['alternatives'][0]['transcript']
-            print("✅ Transcription done!")
-            return {"transcript": transcript}
+                # 👇 Enable automatic language detection
+                response = await self.dg_client.transcription.prerecorded(
+                    source,
+                    {
+                        "smart_format": True,
+                        "detect_language": True
+                    }
+                )
+
+            # Extract transcript
+            transcript = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+
+            # 👇 Extract detected language (Deepgram auto-detected)
+            language = response["results"].get("language")
+
+            # Fallback (in case Deepgram doesn't return a language)
+            if not language:
+                try:
+                    language = detect(transcript)
+                except LangDetectException:
+                    language = "en"  # default to English if uncertain
+
+            print(f"✅ Transcription done! Language detected: {language}")
+            return {"transcript": transcript, "language": language}
+
+        except Exception as e:
+            print(f"❌ Error during Deepgram transcription: {e}")
+            return {"transcript": "", "language": "unknown"}
+
         finally:
             if os.path.exists(temp_file.name):
                 os.unlink(temp_file.name)
                 print("🗑️ Temporary file deleted")
 
-whisper_service = WhisperService()
 
 #git+https://github.com/openai/whisper.git
 
